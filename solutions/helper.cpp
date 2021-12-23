@@ -2,8 +2,8 @@
 #include <cctype>
 #include <vector>
 #include <sstream>
+#include <string>
 #include <fstream>
-#include <iterator>
 
 #include "helper.hpp"
 
@@ -36,11 +36,14 @@ vector<int> aoc::Helper::intLines(string path) {
     return lines;
 }
 
-vector<string> aoc::Helper::splitLines(string line, std::string delimiter = " ") {
+vector<string> aoc::Helper::splitLines(string line, char delimiter) {
     vector<string> tokens;
-
     istringstream stream(line);
-    copy(istream_iterator<string>(stream), istream_iterator<string>(), back_inserter(tokens));
+
+    string token;
+	while (getline(stream, token, delimiter)) {
+        tokens.push_back(token);
+	}
 
     return tokens;
 }
