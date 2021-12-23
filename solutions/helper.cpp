@@ -1,17 +1,20 @@
 #include <iostream>
 #include <cctype>
 #include <vector>
+#include <sstream>
 #include <fstream>
+#include <iterator>
 
 #include "helper.hpp"
 
+using namespace std;
 
-std::vector<std::string> aoc::Helper::getLines(std::string path) {
-    std::vector<std::string> lines;
-    std::ifstream file(path);
+vector<string> aoc::Helper::getLines(string path) {
+    vector<string> lines;
+    ifstream file(path);
 
-    std::string line;
-    while (std::getline(file, line)) {
+    string line;
+    while (getline(file, line)) {
         lines.push_back(line);
     }
 
@@ -20,15 +23,24 @@ std::vector<std::string> aoc::Helper::getLines(std::string path) {
 }
 
 
-std::vector<int> aoc::Helper::intLines(std::string path) {
-    std::vector<int> lines;
-    std::ifstream file(path);
+vector<int> aoc::Helper::intLines(string path) {
+    vector<int> lines;
+    ifstream file(path);
 
-    std::string line;
-    while (std::getline(file, line)) {
-        lines.push_back(std::stoi(line));
+    string line;
+    while (getline(file, line)) {
+        lines.push_back(stoi(line));
     }
 
     file.close();
     return lines;
+}
+
+vector<string> aoc::Helper::splitLines(string line, std::string delimiter = " ") {
+    vector<string> tokens;
+
+    istringstream stream(line);
+    copy(istream_iterator<string>(stream), istream_iterator<string>(), back_inserter(tokens));
+
+    return tokens;
 }
