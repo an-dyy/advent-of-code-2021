@@ -10,4 +10,4 @@ run: a.out
 	cd $(DAY); ./a.out
 
 clean:
-	cd $(DAY); rm ./a.out
+	find . -path "*/a.out"  -delete
